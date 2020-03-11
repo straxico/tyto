@@ -14,9 +14,8 @@ services:
     mongodb_container:
         image: mongo:latest
         restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: "root"
-            MONGO_INITDB_ROOT_PASSWORD: "rootpassword"
+        env_file:
+            - ./.env
         ports:
         - 27017:27017
         volumes:
