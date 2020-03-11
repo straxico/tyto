@@ -3,6 +3,10 @@ version: '3.7'
 services:
     backApi_container:
         image: back:latest
+        build:
+            context: "."
+            dockerfile: Dockerfile
+      
         restart: always
         expose:
             - "4000"
