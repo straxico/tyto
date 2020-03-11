@@ -1,20 +1,50 @@
 version: '3.7'
+
 services:
     backApi_container:
         image: back:latest
         restart: always
         expose:
-            -3000
+            - "4000"
+        env_file:
+            - ./.env
+        networks:
+            - webnet
+          
     mongodb_container:
         image: mongo:latest
         restart: always
         environment:
-        MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: rootpassword
+            MONGO_INITDB_ROOT_USERNAME: "root"
+            MONGO_INITDB_ROOT_PASSWORD: "rootpassword"
         ports:
         - 27017:27017
         volumes:
         - mongodb_data_container:/data/db
+        links:
+            - backApi_container
+        networks:
+            - webnet
 
+    nginx_server:
+        image: "nginx:alpine"
+        container_name: "nginx"
+        restart: always
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+        command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+        links:
+            - mongodb_container
+        networks:
+            - webnet
+        ports:
+            - "80:80"
+            - "443:443"
+            
 volumes:
   mongodb_data_container:
+
+networks:
+    webnet:
+        driver: bridge
+      
