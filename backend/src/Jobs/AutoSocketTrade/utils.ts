@@ -14,8 +14,8 @@ export const deleteoldOrderList = async (token: string, AllorderList: exirOrderR
 }
 
 export const createNewOrders = async ({ token, symbol, size, orderbook, priceStep, buy, sell }: { token: string, symbol: exirSymbols, size: { buySize: number, sellSize: number }, orderbook: any, priceStep: number, buy: boolean, sell: boolean }) => {
-    buy && await getExirUserCreateOrder({ token, symbol, size: size.buySize, side: "buy", price: orderbook.bids[0][0] })
-    sell && await getExirUserCreateOrder({ token, symbol, size: size.sellSize, side: "sell", price: orderbook.asks[0][0] })
+    buy && await getExirUserCreateOrder({ token, symbol, size: size.buySize, side: "buy", price: orderbook.bids[1][0] })
+    sell && await getExirUserCreateOrder({ token, symbol, size: size.sellSize, side: "sell", price: orderbook.asks[1][0] })
 }
 
 export const GetSymbolTradeNeedData = async (token: string, symbol: exirSymbols) => {

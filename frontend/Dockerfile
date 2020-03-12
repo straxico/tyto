@@ -16,4 +16,4 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.js ./next.config.js
 
 EXPOSE 3000
-CMD [ "yarn","server"]
+CMD [ "yarn","start"]

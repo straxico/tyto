@@ -8,23 +8,23 @@ import { EXIR_TOKEN } from "../Utils/secrets"
 const allowSymbolTrade: allowSymbolType[] = [
     {
         symbol: 'btc-tmn',
-        buyOrderSize: 0.0001,
-        sellorderSize: 0.0001
+        buyOrderSize: 0.001,
+        sellorderSize: 0.001
     },
     {
         symbol: 'eth-tmn',
-        buyOrderSize: 0.001,
-        sellorderSize: 0.001
+        buyOrderSize: 0.01,
+        sellorderSize: 0.01
     },
     {
         symbol: 'bch-tmn',
-        buyOrderSize: 0.001,
-        sellorderSize: 0.001
+        buyOrderSize: 0.01,
+        sellorderSize: 0.01
     },
     {
         symbol: 'usdt-tmn',
-        buyOrderSize: 1,
-        sellorderSize: 1
+        buyOrderSize: 10,
+        sellorderSize: 10
     }
 ]
 
