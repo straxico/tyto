@@ -9,7 +9,7 @@
     "start": "node server.js",
     "test": "jest --passWithNoTests",
     "eslint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
-    "eslint:fix": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "eslint:fix": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "author": "straxico",
   "license": "MIT",

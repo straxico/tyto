@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
     backApi_container:
-        image: back:latest
+        image: tytoback:latest
         build:
-            context: "."
+            context: "./backend"
             dockerfile: ./DockerFile
       
         restart: always
@@ -14,7 +14,17 @@ services:
             - ./.env
         networks:
             - webnet
-          
+    front_container:
+        image: tytofront:latest
+        build:
+            context: "./frontend"
+            dockerfile: ./Dockerfile
+        
+        restart: always
+        expose:
+            - "3000"
+        networks:
+            - webnet      
     mongodb_container:
         image: mongo:latest
         restart: always
@@ -26,6 +36,7 @@ services:
         - mongodb_data_container:/data/db
         links:
             - backApi_container
+            - front_container
         networks:
             - webnet
 
