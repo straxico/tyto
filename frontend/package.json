@@ -1,8 +1,9 @@
 {
-  "name": "tyto-front",
-  "version": "1.0.0",
-  "description": "React mega starter with next.js styled-components typescript storybook atomic-design resolve-import eslint and ... base orbit-component",
-  "main": "index.js",
+  "name": "front",
+  "version": "0.1.0",
+  "description": "A starting point for Node.js express apps with TypeScript",
+  "author": "straxico",
+  "license": "MIT",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
@@ -11,8 +12,6 @@
     "eslint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
     "eslint:fix": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
-  "author": "straxico",
-  "license": "MIT",
   "dependencies": {
     "@kiwicom/orbit-design-tokens": "^0.6.6",
     "axios": "^0.19.0",
