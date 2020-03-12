@@ -138,7 +138,7 @@ class Card extends React.Component<CardProps, CardState> {
 
   getChildren = () => {
     // Loading Card Logic
-    const children = React.Children.toArray(this.props.children);
+    const children:any = React.Children.toArray(this.props.children);
     if (children[0] === undefined) {
       // Jest test
       return [];
