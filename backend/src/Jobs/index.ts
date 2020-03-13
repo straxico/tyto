@@ -1,6 +1,5 @@
 import ExirTradesJob from "./exirTrades";
 import CryptoPriceJob from "./cryptoPrice";
-import mongoose from "../Utils/dataBase";
 import TgjuPriceJob from "./tgjuPrice";
 import StartAutoTrade from "./AutoSocketTrade";
 import { EXIR_TOKEN } from "../Utils/secrets"
@@ -8,8 +7,8 @@ import { EXIR_TOKEN } from "../Utils/secrets"
 const allowSymbolTrade: allowSymbolType[] = [
     {
         symbol: 'btc-tmn',
-        buyOrderSize: 0.001,
-        sellorderSize: 0.001
+        buyOrderSize: 0.01,
+        sellorderSize: 0.01
     },
     {
         symbol: 'eth-tmn',
@@ -27,7 +26,10 @@ const allowSymbolTrade: allowSymbolType[] = [
         sellorderSize: 10
     }
 ]
-
+const autoTradeConfig:autoTradeConfigType={
+    SPACE_BETWEEN:0.8, //%
+    SPACE_FROM_TWO:3 //%
+}
 const Jobs = async () => {
     console.log('its ok');
     await CryptoPriceJob()
@@ -38,5 +40,5 @@ const Jobs = async () => {
 // mongoose.disconnect()
 
 //Jobs()
-StartAutoTrade(allowSymbolTrade, EXIR_TOKEN)
+StartAutoTrade(allowSymbolTrade,autoTradeConfig, EXIR_TOKEN)
 export default Jobs

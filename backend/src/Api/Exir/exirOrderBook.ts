@@ -1,4 +1,5 @@
 import ExirAxios from "./config";
+import logger from "../../Utils/logger";
 
 const initVal: exirOrderBooksResult = {
   bids: [],
@@ -22,7 +23,7 @@ const getExirOrderBook = ({ symbol }: { symbol?: exirSymbols }) => {
       return res.data as exirOrderBooksRes;
     })
     .catch(err => {
-      console.log(err);
+      logger.info(["API EXIR getExirOrderBook err"]);
       return init
     });
   return data;

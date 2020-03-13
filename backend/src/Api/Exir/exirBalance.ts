@@ -1,4 +1,5 @@
 import ExirAxios from "./config";
+import logger from "../../Utils/logger";
 
 const init: exirBalanceRes = {
   updated_at: "0",
@@ -27,7 +28,8 @@ const getExirBalance = ({ token }: { token: string }) => {
       return res.data as exirBalanceRes;
     })
     .catch(err => {
-      console.log(err);
+      logger.info(["API EXIR getExirBalance err"]);
+
       return init
     });
   return data;

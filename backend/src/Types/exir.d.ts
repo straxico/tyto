@@ -108,4 +108,9 @@ type initCreateOrderdataType={
   symbolItem: allowSymbolType;
   symbolTradeNeedData:symbolTradeNeedDataType;
   userBalance:getUserBalanceType
+  config:autoTradeConfigType
+}
+type autoTradeConfigType={
+  SPACE_BETWEEN: number;
+  SPACE_FROM_TWO: number;
 }
