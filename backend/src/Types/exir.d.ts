@@ -44,6 +44,16 @@ type exirBalanceRes = {
   usdt_available: number;
 };
 
+type exirbalanceType={
+  pending: number;
+  balance: number;
+  available: number;
+}
+
+type getUserBalanceType= exirbalanceType &{
+  fiat:exirbalanceType
+}
+
 type getExirUserCreateOrderProp = {
   token: string;
   symbol: exirSymbols;
@@ -86,4 +96,16 @@ type symbolTradeNeedDataType = {
   trades: exirUserTradesRes;
   orders: exirUserAllOrdersRes;
   priceStep: number;
+}
+type getUserCurrentAutoOrder={
+  buyOrders: exirOrderRes[];
+  sellOrders: exirOrderRes[];
+}
+
+type initCreateOrderdataType={
+  token: string;
+  orderbook: exirOrderBooksResult;
+  symbolItem: allowSymbolType;
+  symbolTradeNeedData:symbolTradeNeedDataType;
+  userBalance:getUserBalanceType
 }

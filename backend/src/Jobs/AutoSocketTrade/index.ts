@@ -1,41 +1,34 @@
 import ExirRealTime from "../../Api/Exir/Socket/realtime"
-import { GetSymbolTradeNeedData, getUserCurrentAutoOrder, deleteoldOrderList, createNewOrders } from "./utils";
-import { buyCondition, sellCondition } from "./tradeCondition";
-
+import { GetSymbolTradeNeedData, getUserCurrentAutoOrder, deleteOrderList, getSymbolUserBalance } from "./utils";
+import {  deleteCondition, createCondition } from "./tradeCondition";
 
 const AutoTradeJob = async (token: string, symbolItem: allowSymbolType, orderbook: exirOrderBooksResult) => {
+
     const symbolTradeNeedData = await GetSymbolTradeNeedData(token, symbolItem.symbol)
-    const userCurrentAutoOrder = getUserCurrentAutoOrder(symbolTradeNeedData.orders, symbolItem)
-    const filterForDeleteBuy = (order: exirOrderRes) => buyCondition(order, orderbook, symbolTradeNeedData)
-    const filterForDeleteSell = (order: exirOrderRes) => sellCondition(order, orderbook, symbolTradeNeedData)
-    const initCreateOrderdata = {
+    const userCurrentAutoOrder =  getUserCurrentAutoOrder(symbolTradeNeedData.orders, symbolItem)
+    const userBalance= await getSymbolUserBalance({token,symbol:symbolItem.symbol})
+    const filterForDelete = (order: exirOrderRes) => deleteCondition(order, orderbook, symbolTradeNeedData)
+    const initCreateOrderdata:initCreateOrderdataType = {
         token,
         orderbook,
-        priceStep: symbolTradeNeedData.priceStep,
-        symbol: symbolItem.symbol,
-        size: { buySize: symbolItem.buyOrderSize, sellSize: symbolItem.sellorderSize }
+        symbolItem,
+        symbolTradeNeedData,
+        userBalance
     }
     //trade
-    if (userCurrentAutoOrder.haveOrders) {
-        console.log('user have auto order');
-        const isDeletedBuy = await deleteoldOrderList(token, userCurrentAutoOrder.buyOrders, filterForDeleteBuy)
-        const isDeletedSell = await deleteoldOrderList(token, userCurrentAutoOrder.sellOrders, filterForDeleteSell)
-        const isNeedCreateBuyOrder = !!isDeletedBuy.length || !!!userCurrentAutoOrder.buyOrders.length
-        const isNeedCreateSellOrder = !!isDeletedSell.length || !!!userCurrentAutoOrder.sellOrders.length
+        const isDeleted = await deleteOrderList(token, userCurrentAutoOrder,filterForDelete)
+        const haveBuyOrder = (userCurrentAutoOrder.buyOrders.length-isDeleted.buyDeleted.length)>0
+        const haveSellOrder = (userCurrentAutoOrder.sellOrders.length-isDeleted.sellDeleted.length)>0     
+           
+        if(!haveBuyOrder){            
+          await  createCondition('buy',initCreateOrderdata)
+        }
+        if(!haveSellOrder){
+          await  createCondition('sell',initCreateOrderdata) 
+        }
+        console.log('........................wait for chane...........................');
+        
 
-        await createNewOrders({
-            ...initCreateOrderdata,
-            buy: isNeedCreateBuyOrder,
-            sell: isNeedCreateSellOrder
-        })
-    } else {
-        console.log('user dont have auto order');
-        await createNewOrders({
-            ...initCreateOrderdata,
-            buy: true,
-            sell: true
-        })
-    }
 }
 
 const StartAutoTrade = (allowSymbolTrade: allowSymbolType[], token: string) => {

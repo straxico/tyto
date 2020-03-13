@@ -29,12 +29,14 @@ const allowSymbolTrade: allowSymbolType[] = [
 ]
 
 const Jobs = async () => {
+    console.log('its ok');
     await CryptoPriceJob()
     await ExirTradesJob()
     await TgjuPriceJob()
     console.log('connection closed');
-    mongoose.disconnect()
 }
+// mongoose.disconnect()
 
-Jobs()
+//Jobs()
 StartAutoTrade(allowSymbolTrade, EXIR_TOKEN)
+export default Jobs
