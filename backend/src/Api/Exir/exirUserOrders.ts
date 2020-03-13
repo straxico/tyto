@@ -18,7 +18,7 @@ export const getExirUserAllOrders = ({
       return res.data as exirUserAllOrdersRes;
     })
     .catch(err => {
-      logger.info(["getExirUserAllOrders err", err.response.data.message, symbol]);
+      logger.info(["API EXIR getExirUserAllOrders err", err.response.data.message, symbol]);
 
       return [] as exirUserAllOrdersRes
     });
@@ -41,7 +41,7 @@ export const getExirUserOrderById = ({
       return res.data as exirOrderRes;
     })
     .catch(err => {
-      console.log(err);
+      logger.info(["API EXIR getExirUserOrderById err", err]);
     });
   return data;
 };

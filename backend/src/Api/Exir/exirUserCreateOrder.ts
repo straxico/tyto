@@ -15,11 +15,11 @@ const getExirUserCreateOrder = ({
 
   const data = ExirAxios.post("/order", body, config)
     .then(res => {
-      logger.info(["create", res.data.created_by, symbol, side, price, size]);
+      logger.info(["API EXIR create", res.data.created_by, symbol, side, price, size]);
       return res.data as exirOrderRes;
     })
     .catch(err => {
-      logger.info(["create err", err.response.data.message, symbol, side, price, size]);
+      logger.info(["API EXIR create err", err.response.data.message, symbol, side, price, size]);
 
     });
   return data;

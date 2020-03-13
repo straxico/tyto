@@ -38,11 +38,11 @@ export const getExirUserDeleteOrderById = ({
 
   const data = ExirAxios.delete(`/user/orders/${orderId}`, config)
     .then(res => {
-      logger.info(["delete", res.data.created_by, res.data.symbol, res.data.side, res.data.price, res.data.size]);
+      logger.info(["API EXIR delete", res.data.created_by, res.data.symbol, res.data.side, res.data.price, res.data.size]);
       return res.data as exirOrderRes;
     })
     .catch(err => {
-      logger.info(["delete err", err.message]);
+      logger.info(["API EXIR delete err", err.message]);
     });
   return data;
 };

@@ -17,7 +17,7 @@ const getExirUserTrades = ({
       return res.data as exirUserTradesRes;
     })
     .catch(err => {
-      logger.info(["getExirUserTrades err", err.response.data.message, symbol]);
+      logger.info(["API EXIR getExirUserTrades err", err.response.data.message, symbol]);
       return [] as exirUserTradesRes
     });
   return data;

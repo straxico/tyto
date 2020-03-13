@@ -10,7 +10,7 @@ const getExirTrade = async ({ symbol }: { symbol?: exirSymbols }) => {
     return res.data as exirTradesRes;
   }
   catch (err) {
-    logger.info(["getExirTrade err", err.response.data.message, symbol]);
+    logger.info(["API EXIR getExirTrade err", err.response.data.message, symbol]);
 
   }
 };
