@@ -42,9 +42,7 @@ export const getExirUserDeleteOrderById = ({
       return res.data as exirOrderRes;
     })
     .catch(err => {
-      logger.info(["delete err", err]);
-
-      console.log(err);
+      logger.info(["delete err", err.message]);
     });
   return data;
 };

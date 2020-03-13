@@ -1,4 +1,5 @@
 import ExirAxios from "./config";
+import logger from "../../Utils/logger";
 
 const getExirTrade = async ({ symbol }: { symbol?: exirSymbols }) => {
   const config = {
@@ -9,7 +10,8 @@ const getExirTrade = async ({ symbol }: { symbol?: exirSymbols }) => {
     return res.data as exirTradesRes;
   }
   catch (err) {
-    console.log(err);
+    logger.info(["getExirTrade err", err.response.data.message, symbol]);
+
   }
 };
 export default getExirTrade;

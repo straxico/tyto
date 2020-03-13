@@ -20,7 +20,9 @@
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn run watch-ts\" \"yarn run serve-debug\""
   },
   "dependencies": {
+    "@types/agenda": "^2.0.6",
     "@types/socket.io-client": "^1.4.32",
+    "agenda": "^3.0.0",
     "async": "^3.1.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",

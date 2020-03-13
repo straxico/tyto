@@ -1,4 +1,5 @@
 import ExirAxios from "./config";
+import logger from "../../Utils/logger";
 
 const getExirUserTrades = ({
   token,
@@ -16,7 +17,7 @@ const getExirUserTrades = ({
       return res.data as exirUserTradesRes;
     })
     .catch(err => {
-      console.log(err);
+      logger.info(["getExirUserTrades err", err.response.data.message, symbol]);
       return [] as exirUserTradesRes
     });
   return data;

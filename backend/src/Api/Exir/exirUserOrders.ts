@@ -1,4 +1,5 @@
 import ExirAxios from "./config";
+import logger from "../../Utils/logger";
 
 export const getExirUserAllOrders = ({
   token,
@@ -17,7 +18,8 @@ export const getExirUserAllOrders = ({
       return res.data as exirUserAllOrdersRes;
     })
     .catch(err => {
-      console.log(err);
+      logger.info(["getExirUserAllOrders err", err.response.data.message, symbol]);
+
       return [] as exirUserAllOrdersRes
     });
   return data;
