@@ -507,6 +507,22 @@
     "@types/bson" "*"
     "@types/node" "*"
 
+"@types/mongoose-promise@^4.5.9":
+  version "4.5.9"
+  resolved "https://registry.yarnpkg.com/@types/mongoose-promise/-/mongoose-promise-4.5.9.tgz#1c6c2437ef6d0b2cec3b4d175a420b78148dbcb9"
+  integrity sha512-Ce4wBL75ooy+aZU6Jc60QhI6+3BZG/kXViZ3WlmGzOJ3sSvo8ZhY2sq7K4L8cEi5BQ0oH7BlVEbeQzoFC3oFwA==
+  dependencies:
+    "@types/mongoose" "*"
+    "@types/mpromise" "*"
+
+"@types/mongoose@*":
+  version "5.7.6"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.7.6.tgz#c08d41b33a4a5e1984fc4d3c7bc2a76cc6e17ffc"
+  integrity sha512-+GMPd3MRem1A7fw97PkE2aQwWoyYMMZ55lyr7slaCnAvz24+c2WQ2zGHafT9toW/gOciN2yDTY1e0xGLeKHgRA==
+  dependencies:
+    "@types/mongodb" "*"
+    "@types/node" "*"
+
 "@types/mongoose@^5.5.18":
   version "5.7.2"
   resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.7.2.tgz#b790c8baf5a9454cffa9a19e07957f7fea552203"
@@ -514,6 +530,11 @@
   dependencies:
     "@types/mongodb" "*"
     "@types/node" "*"
+
+"@types/mpromise@*":
+  version "0.5.30"
+  resolved "https://registry.yarnpkg.com/@types/mpromise/-/mpromise-0.5.30.tgz#3ea8317d1f968face2f0f309f5ace92aab9a5280"
+  integrity sha512-gb9uShOUeaWrEMWqyKNT3hMmJrBFQn7LyRh+VczCkSdgEqMo/I2ln8awtHfIimi/ro7j8BlCjLDPFv4E121FZg==
 
 "@types/node@*":
   version "13.7.6"

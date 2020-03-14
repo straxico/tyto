@@ -15,12 +15,13 @@ const preExirTrade = (exirTradesRes: exirTradesRes) => {
   return result;
 };
 
-const ExirTradesJob = async () => {
+const ExirTradesJob = async (job: any, done: () => void) => {
   const res = await getExirTrade({})
   const exirTradesRes = preExirTrade(res as exirTradesRes);
-  return Promise.all(exirTradesRes.map(async item => await addExirTrades(item))).catch(err => {
+  await Promise.all(exirTradesRes.map(async item => await addExirTrades(item))).catch(err => {
     console.log(err);
   });
+  done()
 };
 
 export default ExirTradesJob;

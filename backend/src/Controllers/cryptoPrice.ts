@@ -1,8 +1,8 @@
 import { CryptoPrice } from "../Models/CryptoPrice";
-export const addCryptoPrice = (CryptoPriceResItem: CryptoPriceResType) => {
+export const addCryptoPrice = async (CryptoPriceResItem: CryptoPriceResType) => {
   const newPrice = new CryptoPrice(CryptoPriceResItem);
 
-  return CryptoPrice.findOne(
+  return await CryptoPrice.findOne(
     {
       symbol: CryptoPriceResItem.symbol,
       price: CryptoPriceResItem.price,

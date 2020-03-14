@@ -20,7 +20,7 @@ const getCoinmarketcap = async () => {
         }
     };
     try {
-        const res = await CoinmarketcapAxios.get("/cryptocurrency/listings/latest?start=1&limit=4&convert=USDT", config);
+        const res = await CoinmarketcapAxios.get("/cryptocurrency/listings/latest?start=1&limit=4&convert=USDT", config);        
         return serializeCoinmarketcap(res.data);
     }
     catch (err) {
