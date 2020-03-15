@@ -1,0 +1,25 @@
+name: Node CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: install
+        run: yarn install
+      - name: build
+        run: yarn build
+
+      - uses: actions/checkout@v1
+      - name: deploy image
+        run: |
+          docker login docker.pkg.github.com --username straxico --password ${{ secrets.DOCKER_PASSWORD }}
+          docker build ./backend --file DockerFile --tag docker.pkg.github.com/straxico/tyto/master/backend:$(git describe --tags)
+          docker push docker.pkg.github.com/straxico/react-strix/master/backend:$(git describe --tags)
