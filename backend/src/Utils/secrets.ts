@@ -20,6 +20,12 @@ if (!MONGODB_URI) {
         logger.error("No mongo connection string. Set MONGODB_URI_LOCAL environment variable.");
     }
     process.exit(1);
+}else{
+    if (prod) {
+        logger.info("used MONGODB_URI");
+    } else {
+        logger.info("used MONGODB_URI_LOCAL");
+    }
 }
 
 export const EXIR_TOKEN = prod ? process.env["EXIR_TOKEN"] : process.env["EXIR_TOKEN_TEST"];
