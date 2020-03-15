@@ -36,7 +36,6 @@ services:
         - mongodb_data_container:/data/db
         networks:
             - webnet
-
     nginx_server:
         image: "nginx:alpine"
         container_name: "nginx"

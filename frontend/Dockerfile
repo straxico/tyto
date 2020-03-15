@@ -1,7 +1,7 @@
 FROM mhart/alpine-node:12 AS builder
 WORKDIR /app
 COPY . .
-RUN yarn install
+RUN yarn 
 RUN yarn build
 # And then copy over node_modules, etc from that stage to the smaller base image
 FROM mhart/alpine-node:12
