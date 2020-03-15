@@ -1,6 +1,7 @@
 FROM mhart/alpine-node:12 AS builder
 WORKDIR /app
 COPY . .
+ENV NODE_ENV production
 RUN yarn 
 RUN yarn build
 # And then copy over node_modules, etc from that stage to the smaller base image
@@ -9,7 +10,7 @@ WORKDIR /app
 
 COPY --from=builder /app/yarn.lock ./yarn.lock
 COPY --from=builder /app/package.json ./package.json
-
+ENV NODE_ENV production
 RUN yarn install --no-cache --production
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
