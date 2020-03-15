@@ -18,5 +18,5 @@ jobs:
           yarn install
           yarn build
           docker login docker.pkg.github.com --username straxico --password ${{ secrets.DOCKER_PASSWORD }}
-          docker build . --file DockerFile --tag docker.pkg.github.com/straxico/tyto/master/backend:latest
-          docker push docker.pkg.github.com/straxico/react-strix/master/backend:latest
+          docker build . --file DockerFile --tag docker.pkg.github.com/straxico/tyto/backend:latest
+          docker push docker.pkg.github.com/straxico/tyto/backend:latest
