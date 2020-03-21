@@ -1,4 +1,5 @@
 import io from "socket.io-client";
+import _ from "lodash";
 
 const ExirRealTime = (
   { symbol, event, fn }: {
@@ -9,6 +10,6 @@ const ExirRealTime = (
     query: { symbol }
   });
 
-  socket.on(event, fn); // orderbook event
+  socket.on(event,_.debounce(fn, 5000)); // orderbook event
 };
 export default ExirRealTime;

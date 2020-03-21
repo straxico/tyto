@@ -8,7 +8,7 @@ export const deleteOrderList = async (token: string, AllorderList:getUserCurrent
     const buyorderFilteredForDelete =AllorderList.buyOrders.filter(deletConditionFn)
     const sellorderFilteredForDelete =AllorderList.sellOrders.filter(deletConditionFn)
 
-    const deletfn= (orderlist:exirOrderRes[])=> Promise.all(orderlist.map(async order => await getExirUserDeleteOrderById({ token, orderId: order.id }))).catch(err => {
+    const deletfn= async (orderlist:exirOrderRes[])=> await Promise.all(orderlist.map(async order => await getExirUserDeleteOrderById({ token, orderId: order.id }))).catch(err => {
         console.log(err);
         return []
     });

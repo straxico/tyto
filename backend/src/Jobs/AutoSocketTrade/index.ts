@@ -18,8 +18,7 @@ const AutoTradeJob = async (token: string, symbolItem: allowSymbolType, orderboo
     }
     const isDeleted = await deleteOrderList(token, userCurrentAutoOrder,filterForDelete)
     const haveBuyOrder = (userCurrentAutoOrder.buyOrders.length-isDeleted.buyDeleted.length)>0
-    const haveSellOrder = (userCurrentAutoOrder.sellOrders.length-isDeleted.sellDeleted.length)>0     
-        
+    const haveSellOrder = (userCurrentAutoOrder.sellOrders.length-isDeleted.sellDeleted.length)>0             
     if(!haveBuyOrder){            
       await  createCondition('buy',initCreateOrderdata)
     }
@@ -41,7 +40,7 @@ const StartAutoTrade = (allowSymbolTrade: allowSymbolType[],config:autoTradeConf
     allowSymbolTrade.map((symbolItem) => ExirRealTime({
         symbol: symbolItem.symbol,
         event: 'orderbook',
-        fn: (orderbookData: exirOrderBooksRes) => AutoTradeJob(token, symbolItem, orderbookData[symbolItem.symbol],config)
+        fn: async (orderbookData: exirOrderBooksRes) => await AutoTradeJob(token, symbolItem, orderbookData[symbolItem.symbol],config)
     })
     )
 }
