@@ -6,6 +6,17 @@ export type UserDocument = mongoose.Document & {
   email: string;
   password: string;
   token: string;
+  options: {
+    emergencyTrade: {
+      changePercent: Number,
+      changePriodByMin: Number
+    },
+    tradeConfig:{
+      spaceBetween: Number,
+      spaceFromSecondOrder:Number
+    },
+    allowedSymbolTrade:{simbol:String,buySize:Number,sellSize:Number}[]
+  }
 };
 //SCHEMA
 const userSchema = new mongoose.Schema<UserDocument>(
@@ -16,9 +27,14 @@ const userSchema = new mongoose.Schema<UserDocument>(
     token: String,
     options: {
       emergencyTrade: {
-        ChangePercent: Number,
-        ChangePriodByMin: Number
-      }
+        changePercent: Number,
+        changePriodByMin: Number
+      },
+      tradeConfig:{
+        spaceBetween: Number,
+        spaceFromSecondOrder:Number
+      },
+      allowedSymbolTrade:[{simbol:String,buySize:Number,sellSize:Number}]
     }
   },
   { timestamps: true }
