@@ -5,7 +5,7 @@ import CryptoPriceJob from './Jobs/cryptoPrice';
 import TgjuPriceJob from './Jobs/tgjuPrice';
 import AutoTradeJob from './Jobs/AutoTrade';
 
-var agenda = new Agenda({db:{address:MONGODB_URI,collection:'jobs',options:{useUnifiedTopology: true}}});
+export var agenda = new Agenda({db:{address:MONGODB_URI,collection:'jobs',options:{useUnifiedTopology: true}}});
 
 //define events
 agenda.on('start', job => {

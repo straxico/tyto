@@ -10,7 +10,7 @@ console.log($);
         visitorPercentage: JSON.parse ($('script#visitorPercentage').text()),
         competitorsJSON: JSON.parse ($('script#competitorsJSON').text()),
         topKeywordsJSON: JSON.parse ($('script#topKeywordsJSON').text()),
-        countryRank: [],
+        countryRank: [] as {rank:string,contry:string}[],
     }
     $('#countrydropdown li').each((i,x)=> {
         const rank=$(x).attr('data-value') || null
