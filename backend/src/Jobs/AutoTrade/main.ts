@@ -1,12 +1,12 @@
-import ExirRealTime from "../../Api/Exir/Socket/realtime"
 import { GetSymbolTradeNeedData, getUserCurrentAutoOrder, deleteOrderList, getSymbolUserBalance } from "./utils";
 import {  deleteCondition, createCondition } from "./tradeCondition";
+import getExirOrderBook from "../../Api/Exir/exirOrderBook";
 
-const AutoTradeJob = async (token: string, symbolItem: allowSymbolType, orderbook: exirOrderBooksResult,config:autoTradeConfigType) => {
-
+const MainAutoTrade = async (token: string, symbolItem: allowSymbolType,config:autoTradeConfigType) => {
     const symbolTradeNeedData = await GetSymbolTradeNeedData(token, symbolItem.symbol)
     const userCurrentAutoOrder =  getUserCurrentAutoOrder(symbolTradeNeedData.orders, symbolItem)
     const userBalance= await getSymbolUserBalance({token,symbol:symbolItem.symbol})
+    const orderbook=await getExirOrderBook({symbol:symbolItem.symbol})
     const filterForDelete = (order: exirOrderRes) => deleteCondition(order, orderbook, symbolTradeNeedData,config)
     const initCreateOrderdata:initCreateOrderdataType = {
         token,
@@ -25,23 +25,6 @@ const AutoTradeJob = async (token: string, symbolItem: allowSymbolType, orderboo
     if(!haveSellOrder){
       await  createCondition('sell',initCreateOrderdata) 
     }
-        
 
 }
-
-const StartAutoTrade = (allowSymbolTrade: allowSymbolType[],config:autoTradeConfigType, token: string) => {
-  console.log(`................ auto trading....................`);
-  console.log(`................allowSymbolTrade is....................`);
-  console.log(allowSymbolTrade);
-  console.log(`................config is....................`);
-  console.log(config);
-  console.log(`................ start....................`);
-
-    allowSymbolTrade.map((symbolItem) => ExirRealTime({
-        symbol: symbolItem.symbol,
-        event: 'orderbook',
-        fn: async (orderbookData: exirOrderBooksRes) => await AutoTradeJob(token, symbolItem, orderbookData[symbolItem.symbol],config)
-    })
-    )
-}
-export default StartAutoTrade
+export default MainAutoTrade

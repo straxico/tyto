@@ -14,18 +14,17 @@ const init: exirOrderBooksRes = {
 }
 
 
-const getExirOrderBook = ({ symbol }: { symbol?: exirSymbols }) => {
+const getExirOrderBook = async ({ symbol }: { symbol: exirSymbols })=> {
   const config = {
     params: { symbol }
   };
-  const data = ExirAxios.get("/orderbooks", config)
-    .then(res => {
-      return res.data as exirOrderBooksRes;
-    })
-    .catch(err => {
-      logger.info(["API EXIR getExirOrderBook err"]);
-      return init
-    });
-  return data;
+  try {
+    const res = await ExirAxios.get("/orderbooks", config);
+    return res.data[symbol] as exirOrderBooksResult
+  }
+  catch (err) {
+    logger.info(["API EXIR getExirOrderBook err"]);
+    return init[symbol]
+  }
 };
 export default getExirOrderBook;

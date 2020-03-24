@@ -3,6 +3,7 @@ import { MONGODB_URI } from './Utils/secrets';
 import ExirTradesJob from './Jobs/exirTrades';
 import CryptoPriceJob from './Jobs/cryptoPrice';
 import TgjuPriceJob from './Jobs/tgjuPrice';
+import AutoTradeJob from './Jobs/AutoTrade';
 
 var agenda = new Agenda({db:{address:MONGODB_URI,collection:'jobs',options:{useUnifiedTopology: true}}});
 
@@ -23,6 +24,7 @@ agenda.on('fail', (err, job) => {
 
 //define jobs
 agenda.define('ExirTradesJob',{lockLifetime: 10000}, ExirTradesJob);
+agenda.define('AutoTradesJob',{lockLifetime: 10000}, AutoTradeJob);
 agenda.define('CryptoPriceJob',{lockLifetime: 10000}, CryptoPriceJob);
 agenda.define('TgjuPriceJob',{lockLifetime: 10000}, TgjuPriceJob);
 
@@ -30,7 +32,8 @@ agenda.define('TgjuPriceJob',{lockLifetime: 10000}, TgjuPriceJob);
 (async () => {
   await agenda.start();
   //minutes
-  await agenda.every('30 seconds', 'ExirTradesJob');
-  await agenda.every('30 seconds', 'CryptoPriceJob');
-  await agenda.every('30 seconds', 'TgjuPriceJob');
+  await agenda.every('20 seconds', 'AutoTradesJob');
+  await agenda.every('2 minutes', 'ExirTradesJob');
+  await agenda.every('2 minutes', 'CryptoPriceJob');
+  await agenda.every('2 minutes', 'TgjuPriceJob');
 })()
