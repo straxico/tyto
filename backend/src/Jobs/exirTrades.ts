@@ -3,7 +3,7 @@ import getExirTrade from "../Api/Exir/exirTrades";
 const preExirTrade = (exirTradesRes: exirTradesRes) => {
   const result: exirTrades[] = [];
   Object.keys(exirTradesRes).map((key: exirSymbols) => {
-    exirTradesRes[key].map(item => {
+    exirTradesRes[key].forEach(item => {
       result.push({
         price: item.price,
         size: item.size,
