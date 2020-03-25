@@ -35,3 +35,4 @@ systemctl start docker
 docker --version
 
 docker-compose --version
+cat ./githubToken.txt | docker login docker.pkg.github.com -u straxico --password-stdin
