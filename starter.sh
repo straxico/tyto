@@ -9,7 +9,7 @@ yum remove docker \
                   docker-logrotate \
                   docker-engine
 
-yum install -y yum-utils \
+yum install -y  yum-utils \
   device-mapper-persistent-data \
   lvm2
 
