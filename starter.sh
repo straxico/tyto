@@ -29,10 +29,18 @@ curl -L https://github.com/docker/compose/releases/download/1.25.4/docker-compos
 chmod +x /usr/local/bin/docker-compose
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+
 systemctl enable docker
 systemctl start docker
 
 docker --version
 
 docker-compose --version
+
+yum install wget
+wget https://github.com/bcicen/ctop/releases/download/v0.7.1/ctop-0.7.1-linux-amd64  -O /usr/local/bin/ctop
+chmod +x /usr/local/bin/ctop
+curl -sSf https://moncho.github.io/dry/dryup.sh | sudo sh
+sudo chmod 755 /usr/local/bin/dry
+
 cat ./githubToken.txt | docker login docker.pkg.github.com -u straxico --password-stdin
