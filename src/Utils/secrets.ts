@@ -12,22 +12,12 @@ if (fs.existsSync("./.env")) {
 export const ENVIRONMENT = process.env.NODE_ENV;
 const prod = ENVIRONMENT === "production"; // Anything else is treated as 'dev'
 
-export const MONGODB_URI = prod ? process.env["MONGODB_URI"] : process.env["MONGODB_URI_LOCAL"];
+export const MONGODB_URI = prod ? process.env["MONGODB_URI_PRO"] : process.env["MONGODB_URI_DEV"];
 if (!MONGODB_URI) {
     if (prod) {
-        logger.error("No mongo connection string. Set MONGODB_URI environment variable.");
+        logger.error("No mongo connection string. Set MONGODB_URI_PRO environment variable.");
     } else {
-        logger.error("No mongo connection string. Set MONGODB_URI_LOCAL environment variable.");
+        logger.error("No mongo connection string. Set MONGODB_URI_DEV environment variable.");
     }
     process.exit(1);
-}else{
-    if (prod) {
-        logger.info(`used MONGODB_URI =${MONGODB_URI}`);
-    } else {
-        logger.info(`used MONGODB_URI_LOCAL=${MONGODB_URI}`);
-    }
 }
-
-export const EXIR_TOKEN = prod ? process.env["EXIR_TOKEN"] : process.env["EXIR_TOKEN_TEST"];
-export const COINMARKETCAP_TOKEN = prod ? process.env["COINMARKETCAP_TOKEN"] : process.env["COINMARKETCAP_TOKEN_TEST"];
-

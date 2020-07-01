@@ -12,7 +12,7 @@ mongoose
     })
     .then(() => console.log("connected to database"))
     .catch(err => {
-        console.log("MongoDB connection error" + err);
+        console.log("MongoDB connection error:" + err);
         process.exit();
     });
 const db = mongoose.connection;
