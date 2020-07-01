@@ -18,6 +18,7 @@ export type UserDocument = mongoose.Document & {
     allowedSymbolTrade:{simbol:String,buySize:Number,sellSize:Number}[]
   }
 };
+
 //SCHEMA
 const userSchema = new mongoose.Schema<UserDocument>(
   {

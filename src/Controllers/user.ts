@@ -75,3 +75,32 @@ export const postSignup = async (
     }
   );
 };
+
+
+var Kavenegar = require('kavenegar');
+var KavenegarApi = Kavenegar.KavenegarApi({apikey: '744A2F4E51646C475368564A7A3976596F6432724B78533032526157576E62426B4B314A624865456773413D'});
+
+
+/**
+ * POST login/mobileverify
+ * send verify code
+ */
+export const mobileVerify = async (req: Request, res: Response) => {
+  await check("mobile", "mobile is not valid")
+    .isNumeric()
+    .run(req);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.send(errors.array());
+  }
+  KavenegarApi.VerifyLookup({
+    receptor: req.body.mobile,
+    token: "852596",
+    template: "verify"
+  }, function(response:any, status:any) {
+    console.log(response);
+    console.log(status);
+    return res.send({ response,status});
+
+  });
+};
