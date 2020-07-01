@@ -1,3 +1,0 @@
-- [ ] init frontend
-- [ ] make login and register form
-- [ ] test for api endpoints
