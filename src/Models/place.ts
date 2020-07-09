@@ -1,19 +1,21 @@
-import mongoose from "../Utils/dataBase";
+import mongoose from "Utils/dataBase";
 
 //TYPE
 export type PlaceDocument = mongoose.Document & {
   name: string;
   description: string;
+  placeId: string;
 };
 
 //SCHEMA
 const placeSchema = new mongoose.Schema<PlaceDocument>(
   {
-    name: { type: String, unique: true },
+    name: { type: String },
+    placeId: { type: String, unique: true },
     description: { type: String },
   },
   { timestamps: true }
 );
 
 //MODEL
-export const Place = mongoose.model("Place", placeSchema);
+export const Place = mongoose.model<PlaceDocument>("Place", placeSchema);

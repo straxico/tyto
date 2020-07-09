@@ -1,9 +1,9 @@
 import express from "express";
-import * as userController from "../Controllers/user";
+import { postLogin, postSignup } from "Controllers/user";
+import authenticateJWT from "Utils/autenticate";
 
 const userRoute = (app: express.Application) => {
-  app.post("/login", userController.postLogin);
-  app.post("/signup", userController.postSignup);
-  app.post('/login/mobileverify',userController.mobileVerify)
+  app.post("/login", postLogin);
+  app.post("/signup", authenticateJWT, postSignup);
 };
 export default userRoute;
