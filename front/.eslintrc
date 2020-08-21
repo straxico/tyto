@@ -1,0 +1,117 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "mocha": true,
+    "jest/globals": true
+  },
+  "parserOptions": {
+    "jsx": true,
+    "useJSXTextNode": true
+  },
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "jest",
+    "prettier",
+    "@typescript-eslint",
+    "react"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    ],
+    "prefer-const": 1,
+    "linebreak-style": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          ".storybook/**",
+          "**/*.stories.tsx",
+          "**/*.test.tsx"
+        ]
+      }
+    ],
+    "line-comment-position": "off",
+    "camelcase": "off",
+    "react/destructuring-assignment": 0,
+    "arrow-parens": "off",
+    "complexity": [
+      1,
+      12
+    ],
+    "no-console": "off",
+    "max-len": "off",
+    "eqeqeq": "off",
+    "no-unused-vars": "off",
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "markers": [
+          "/"
+        ]
+      }
+    ],
+    "react/prop-types": 0,
+    // "object-curly-newline": ["error", { "multiline": false }],
+    "click-events-have-key-events": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/prefer-es6-class": 0,
+    "react/button-has-type": 0,
+    "react/jsx-closing-bracket-location": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-wrap-multilines": 0,
+    "react/jsx-props-no-spreading": 0,
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "./",
+          "./src",
+          "./src/Components",
+          "./public"
+        ],
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    },
+    "import/core-modules": [
+      "styled-jsx/css"
+    ]
+  }
+}

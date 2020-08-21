@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  storybook_local:
+    container_name: "storybook_local"
+    image: "storybook:latest"
+    build:
+      context: "../.."
+      dockerfile: config/docker/Storybook.Dockerfile
+    restart: always
+    expose:
+      - "8080"
+    networks:
+      - webnet
+  nginx_local:
+    image: "nginx:alpine"
+    container_name: "nginx_local"
+    restart: always
+    volumes:
+      - ../nginx:/etc/nginx
+      - ../nginx/nginx-local.conf:/etc/nginx/nginx.conf
+      - ../ssl/STAR_jajiga_com.crt:/etc/ssl/STAR_jajiga_com.crt
+      - ../ssl/STAR_jajiga_com.key:/etc/ssl/STAR_jajiga_com.key
+      - ../../../pwa:/var/www/pwa
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    networks:
+      - webnet
+    links:
+      - storybook_local
+    ports:
+      - "80:80"
+      - "443:443"
+networks:
+  webnet:
+    driver: bridge

@@ -1,0 +1,58 @@
+@charset 'UTF-8';
+/* Arrows */
+.slick-prev,
+.slick-next
+{
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 35%;
+    display: block;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    color: transparent;
+    outline: none;
+    background: #6378f1;
+    border: white 5px solid;
+    border-radius: 40px;
+    z-index: 1;
+
+}
+
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before
+{
+  color: white;
+}
+
+.slick-prev:before,
+.slick-next:before
+{
+    font-size: 40px;
+    line-height: 38px;
+    opacity: .75;
+    color: black;
+}
+
+.slick-prev
+{
+    left: -0.6%;
+}
+.slick-next
+{
+    right: -0.6%;
+}
+
+.slick-prev:before
+{
+    content: '<';
+}
+.slick-next:before
+{
+    content: '>';
+}
+
+
+
+

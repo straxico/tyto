@@ -1,0 +1,88 @@
+stages:
+  - test
+  - push
+  - deploy
+
+test:
+  stage: test
+  image: node:12-alpine
+  before_script:
+    - yarn
+    - yarn build:icon
+    - yarn build:fontIcons
+  script:
+    - yarn test
+
+push_master:
+  stage: push
+  image: docker:latest
+  when: manual
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+    - docker build --file ./config/docker/Dockerfile --pull -t registry.gitlab.com/jajiga/frontend/master:latest .
+    - docker push registry.gitlab.com/jajiga/frontend/master
+  only:
+    - master
+
+push_dev:
+  stage: push
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+    - docker build --file ./config/docker/Dockerfile --pull -t registry.gitlab.com/jajiga/frontend/develop:latest  .
+    - docker push registry.gitlab.com/jajiga/frontend/develop
+  only:
+    - develop
+
+push_Storybook:
+  stage: push
+  image: docker:latest
+  services:
+    - docker:dind
+  when: manual
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+    - docker build --file ./config/docker/Storybook.Dockerfile --pull -t registry.gitlab.com/jajiga/frontend/storybook:latest  .
+    - docker push registry.gitlab.com/jajiga/frontend/storybook
+  only:
+    - develop
+
+deploy_dev_ssh:
+  stage: deploy
+  environment:
+    name: develop
+  when: manual
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq ssh
+    - apt-get install -y -qq rsync
+    - apt-get install -y -qq sshpass
+    - mkdir ~/.ssh
+    - echo "StrictHostKeyChecking no" >> ~/.ssh/config
+    - export SSHPASS=$USER_PASS_TOONEL
+  script:
+    - sshpass -e ssh -p 9895 root@5.196.177.28 'ssh -i ~/.ssh/b centos@193.176.241.132 "cd /var/www/frontend  && sudo  git checkout develop && sudo git pull origin develop && docker-compose pull && docker-compose up -d && exit"'
+  only:
+    - develop
+
+deploy_master_ssh:
+  stage: deploy
+  environment:
+    name: production
+  when: manual
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq ssh
+    - apt-get install -y -qq rsync
+    - apt-get install -y -qq sshpass
+    - mkdir ~/.ssh
+    - echo "StrictHostKeyChecking no" >> ~/.ssh/config
+    - export SSHPASS=$USER_PASS_TOONEL
+  script:
+    - sshpass -e ssh -p 9895 root@5.196.177.28 'ssh -i ~/.ssh/b centos@193.176.241.132 "cd /var/www/frontend &&  ls && sudo  git checkout master && sudo git pull origin master && docker-compose pull && docker-compose up -d && exit"'
+  only:
+    - master

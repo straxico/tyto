@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip it should match snapshot 1`] = `
+<Fragment>
+  <Tooltip__StyledTooltipChildren
+    aria-describedby="tooltip50000-id-50000"
+    enabled={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    tabIndex={0}
+  >
+    <Icon
+      size="medium"
+    />
+  </Tooltip__StyledTooltipChildren>
+</Fragment>
+`;

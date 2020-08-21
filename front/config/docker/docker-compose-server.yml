@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  develop_server:
+    container_name: "develop_server"
+    image: "registry.gitlab.com/jajiga/frontend/develop:latest"
+    restart: always
+    expose:
+      - "3000"
+    networks:
+      - webnet
+
+  master_server:
+    container_name: "master_server"
+    image: "registry.gitlab.com/jajiga/frontend/master:latest"
+    restart: always
+    expose:
+      - "3000"
+    networks:
+      - webnet
+  storybook_server:
+    container_name: "storybook_server"
+    image: "registry.gitlab.com/jajiga/frontend/storybook:latest"
+    restart: always
+    expose:
+      - "8080"
+    networks:
+      - webnet
+  nginx_server:
+    image: "nginx:alpine"
+    container_name: "nginx"
+    restart: always
+    volumes:
+      - ../nginx:/etc/nginx
+      - ../ssl/STAR_jajiga_com.crt:/etc/ssl/STAR_jajiga_com.crt
+      - ../ssl/STAR_jajiga_com.key:/etc/ssl/STAR_jajiga_com.key
+      - ../../../pwa:/var/www/pwa
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    links:
+      - develop_server
+      - master_server
+      - storybook_server
+    networks:
+      - webnet
+    ports:
+      - "80:80"
+      - "2000:2000"
+      - "4000:4000"
+      - "443:443"
+networks:
+  webnet:
+    driver: bridge

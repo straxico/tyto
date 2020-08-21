@@ -1,0 +1,44 @@
+import Alert from './index';
+
+import { Meta, Story, Preview,Props } from '@storybook/addon-docs/blocks';
+
+
+<Meta title="MDX/Alert" component={Alert} />
+
+# Alert
+
+Let's define a story for our `Alert` component:
+
+<Story name="positive">
+  <Alert >Positive</Alert>
+</Story>
+
+We can drop it in a `Preview` to get a code snippet:
+
+<Preview>
+  <Story name="negative">
+    <Alert >Negative</Alert>
+  </Story>
+</Preview>
+
+We can even preview multiple stories in a block. This
+gets rendered as a group, but defines individual stories
+with unique URLs and isolated snapshot tests.
+
+<Preview>
+  <Story name="warning">
+    <Alert >Warning</Alert>
+  </Story>
+  <Story name="neutral">
+    <Alert >Neutral</Alert>
+  </Story>
+  <Story name="error">
+    <Alert >Error</Alert>
+  </Story>
+  <Story name="with icon">
+    <Alert >
+     
+      with icon
+    </Alert>
+  </Story>
+</Preview>

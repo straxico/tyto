@@ -1,0 +1,73 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "Pages/*": [
+        "./src/Components/Pages/*"
+      ],
+      "Layouts/*": [
+        "./src/Components/Layouts/*"
+      ],
+      "Containers/*": [
+        "./src/Components/Containers/*"
+      ],
+      "Atoms/*": [
+        "./src/Components/Atoms/*"
+      ],
+      "api/*": [
+        "./src/api/*"
+      ],
+      "context/*": [
+        "./src/context/*"
+      ],
+      "hooks/*": [
+        "./src/hooks/*"
+      ],
+      "translate/*": [
+        "./src/translate/*"
+      ],
+      "utils/*": [
+        "./src/utils/*"
+      ],
+      "type/*": [
+        "./src/type/*"
+      ],
+      "static/*": [
+        "./public/static/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin",
+        "validate": false
+      }
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

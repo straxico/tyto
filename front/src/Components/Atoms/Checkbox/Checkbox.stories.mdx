@@ -1,0 +1,16 @@
+import { text, boolean } from '@storybook/addon-knobs';
+import { Meta, Story, Preview,Props } from '@storybook/addon-docs/blocks';
+
+
+import Checkbox from './index';
+
+<Meta title="MDX/Checkbox" component={Checkbox} />
+
+# Checkbox
+
+Let's define a story for our `Checkbox` component:
+Checkbox needs only label and onChange by default.
+
+<Story name="Default">
+    <Checkbox label={text('Label', 'Label')} checked={boolean('Checked', false)} onChange={() => console.log('change')} />;
+</Story>

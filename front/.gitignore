@@ -1,0 +1,12 @@
+node_modules
+.next
+.vscode
+!.vscode/settings.json
+out
+storybook
+coverage
+package-lock.json
+config/ssl
+helpDir.json
+public/static/fonts/icon.woff
+public/static/css/icon.css
