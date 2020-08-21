@@ -18,7 +18,7 @@ export const placeNew = async (
     .run(req);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.send(errors.array());
+    return res.send({ msg: errors.array() });
   }
   const place = new Place({
     name: req.body.name,
@@ -30,8 +30,7 @@ export const placeNew = async (
       return next(err);
     }
     return res.send({
-      msg: "new place saved",
-      place,
+      placeId: place.placeId,
     });
   });
 };
@@ -53,19 +52,19 @@ export const placeGetAll = async (
       }
       if (existedPlace.length) {
         return res.send({
-          msg: "get all place",
           existedPlace,
         });
       }
       return res.send({
         msg: "no place found",
+        existedPlace,
       });
     });
 };
 
 /**
  * GET /place/:id
- * get all place.
+ * get one place.
  */
 export const placeGetOne = async (
   req: Request,
@@ -133,12 +132,13 @@ export const placeDelete = async (
   res: Response,
   next: NextFunction
 ) => {
-  Place.deleteOne({ _id: req.body.id }, (err) => {
+  Place.deleteOne({ placeId: req.params.placeId }, (err) => {
     if (err) {
       return next(err);
     }
     return res.send({
-      msg: `place with id ${req.params.id} deleted`,
+      msg: `place with id ${req.params.placeId} deleted`,
+      placeId: req.params.placeId,
     });
   });
 };

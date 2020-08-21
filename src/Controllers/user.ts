@@ -18,7 +18,7 @@ export const postLogin = async (req: Request, res: Response) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.send(errors.array());
+    return res.send({ msg: errors.array() });
   }
 
   User.findOne({ username: req.body.username }).exec((err, user) => {
@@ -29,14 +29,32 @@ export const postLogin = async (req: Request, res: Response) => {
           JWT_ACCESS_TOKEN
         );
         res.json({
-          accessToken,
-          user,
+          token: accessToken,
+          role: user.role,
         });
       } else {
-        res.send("password incorrect");
+        res.send({
+          msg: [
+            {
+              value: "",
+              msg: "password incorrect",
+              param: "password",
+              location: "body",
+            },
+          ],
+        });
       }
     } else {
-      res.send("Username  incorrect");
+      res.send({
+        msg: [
+          {
+            value: "",
+            msg: "Username  incorrect",
+            param: "username",
+            location: "body",
+          },
+        ],
+      });
     }
   });
 };
@@ -56,7 +74,7 @@ export const postSignup = async (req: any, res: any, next: any) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.send(errors.array());
+    return res.send({ msg: errors.array() });
   }
   const user = new User({
     username: req.body.username,
@@ -80,7 +98,11 @@ export const postSignup = async (req: any, res: any, next: any) => {
         if (err) {
           return next(err);
         }
-        return res.send({ newUser });
+        const accessToken = jwt.sign(
+          { username: newUser.username, role: newUser.role },
+          JWT_ACCESS_TOKEN
+        );
+        return res.json({ token: accessToken });
       });
     }
   );

@@ -4,6 +4,6 @@ import authenticateJWT from "Utils/autenticate";
 
 const userRoute = (app: express.Application) => {
   app.post("/login", postLogin);
-  app.post("/signup", authenticateJWT, postSignup);
+  app.post("/register", authenticateJWT, postSignup);
 };
 export default userRoute;
