@@ -28,7 +28,7 @@
     "agenda": "^3.0.0",
     "agendash": "^1.0.0",
     "async": "^3.1.0",
-    "aws-sdk": "^2.719.0",
+    "aws-sdk": "^2.961.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.5",
