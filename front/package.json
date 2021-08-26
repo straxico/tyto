@@ -69,7 +69,7 @@
     "react-inlinesvg": "^1.2.0",
     "react-intl": "^3.12.0",
     "react-leaflet": "^2.6.1",
-    "react-slick": "^0.25.2",
+    "react-slick": "^0.28.1",
     "sass-loader": "^8.0.2",
     "sentry-testkit": "^3.2.1",
     "showdown": "^1.9.1",
