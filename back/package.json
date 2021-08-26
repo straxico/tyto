@@ -39,7 +39,7 @@
     "dotenv": "^8.2.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
-    "express-validator": "^6.2.0",
+    "express-validator": "^6.12.1",
     "jsdom": "^16.2.0",
     "jsonwebtoken": "^8.5.1",
     "kavenegar": "^1.1.4",
