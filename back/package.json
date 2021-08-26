@@ -43,7 +43,7 @@
     "jsdom": "^16.2.0",
     "jsonwebtoken": "^8.5.1",
     "kavenegar": "^1.1.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "minio": "^7.0.16",
     "module-alias": "^2.2.2",
