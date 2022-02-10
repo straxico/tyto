@@ -129,7 +129,7 @@
     "jsdom": "^15.2.1",
     "local-cors-proxy": "^1.1.0",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
     "react-svg-loader": "^3.0.3",
